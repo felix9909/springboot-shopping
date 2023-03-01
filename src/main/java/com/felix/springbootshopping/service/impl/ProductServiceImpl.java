@@ -1,6 +1,7 @@
 package com.felix.springbootshopping.service.impl;
 
 import com.felix.springbootshopping.dao.ProductDao;
+import com.felix.springbootshopping.dto.ProductRequest;
 import com.felix.springbootshopping.model.Product;
 import com.felix.springbootshopping.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,5 +17,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product getProductById(Integer productId) {
         return productDao.getProductById(productId);
+    }
+
+    @Override
+    public Integer createProduct(ProductRequest productRequest) {
+
+
+        return productDao.createProduct(productRequest);
     }
 }
