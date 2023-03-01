@@ -12,7 +12,6 @@ public class ProductRequest {
     private String productName;
 
     @NotNull
-    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private String category;
 
     @NotNull
