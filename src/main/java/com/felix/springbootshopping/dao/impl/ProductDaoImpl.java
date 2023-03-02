@@ -1,6 +1,7 @@
 package com.felix.springbootshopping.dao.impl;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.felix.springbootshopping.constant.ProductCategory;
 import com.felix.springbootshopping.dao.ProductDao;
 import com.felix.springbootshopping.dto.ProductRequest;
 import com.felix.springbootshopping.model.Product;
@@ -24,12 +25,22 @@ public class ProductDaoImpl implements ProductDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
-    public List<Product> getProducts() {
+    public List<Product> getProducts(ProductCategory category , String search) {
         String sql = "SELECT product_id , product_name , category , image_url , price ," +
-                "stock , description , created_date , last_modified_date FROM product";
-        Map<String , Object> map = new HashMap<>();
+                "stock , description , created_date , last_modified_date FROM product WHERE 1=1";
+        Map<String, Object> map = new HashMap<>();
 
-        List<Product> productList = namedParameterJdbcTemplate.query(sql , map ,new ProductRowMapper());
+        if (category != null) {
+            sql = sql + " AND category = :category";
+            map.put("category", category.name());
+        }
+
+        if(search != null){
+            sql = sql + " AND product_name LIKE :search " ;
+            map.put("search" , "%" + search + "%");
+        }
+
+        List<Product> productList = namedParameterJdbcTemplate.query(sql, map, new ProductRowMapper());
 
         return productList;
     }
@@ -58,7 +69,7 @@ public class ProductDaoImpl implements ProductDao {
                 ":createdDate,:lastModifiedDate)";
         Map<String, Object> map = new HashMap<>();
         map.put("productName", productRequest.getProductName());
-        map.put("category", productRequest.getCategory());
+        map.put("category", productRequest.getCategory().toString());
         map.put("imageUrl", productRequest.getImageUrl());
         map.put("price", productRequest.getPrice());
         map.put("stock", productRequest.getStock());

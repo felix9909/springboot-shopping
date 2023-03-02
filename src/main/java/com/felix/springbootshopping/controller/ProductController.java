@@ -1,6 +1,7 @@
 package com.felix.springbootshopping.controller;
 
 
+import com.felix.springbootshopping.constant.ProductCategory;
 import com.felix.springbootshopping.dto.ProductRequest;
 import com.felix.springbootshopping.model.Product;
 import com.felix.springbootshopping.service.ProductService;
@@ -20,11 +21,15 @@ public class ProductController {
 
 
     @GetMapping("/products")
-    public ResponseEntity<List<Product>> getProducts() {
-        List<Product> productList = productService.getProducts();
+    public ResponseEntity<List<Product>> getProducts(
+            @RequestParam(required = false) ProductCategory category,
+            @RequestParam(required = false) String search
+    ) {
+        List<Product> productList = productService.getProducts(category , search);
         return ResponseEntity.status(HttpStatus.OK).body(productList);
 
     }
+
 
     @GetMapping("/products/{productId}")
     public ResponseEntity<Product> getProduct(@PathVariable Integer productId) {

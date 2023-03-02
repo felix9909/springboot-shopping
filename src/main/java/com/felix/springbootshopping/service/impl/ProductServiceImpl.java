@@ -1,5 +1,6 @@
 package com.felix.springbootshopping.service.impl;
 
+import com.felix.springbootshopping.constant.ProductCategory;
 import com.felix.springbootshopping.dao.ProductDao;
 import com.felix.springbootshopping.dto.ProductRequest;
 import com.felix.springbootshopping.model.Product;
@@ -14,8 +15,8 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
 
     @Override
-    public List<Product> getProducts() {
-        return productDao.getProducts();
+    public List<Product> getProducts(ProductCategory category ,String search) {
+        return productDao.getProducts(category ,search);
     }
 
     @Autowired

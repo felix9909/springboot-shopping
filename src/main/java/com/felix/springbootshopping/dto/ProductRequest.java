@@ -1,7 +1,5 @@
 package com.felix.springbootshopping.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.felix.springbootshopping.constant.ProductCategory;
 
 import javax.validation.constraints.NotNull;
@@ -12,7 +10,7 @@ public class ProductRequest {
     private String productName;
 
     @NotNull
-    private String category;
+    private ProductCategory category;
 
     @NotNull
     private String imageUrl;
@@ -33,11 +31,11 @@ public class ProductRequest {
         this.productName = productName;
     }
 
-    public String getCategory() {
+    public ProductCategory getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(ProductCategory category) {
         this.category = category;
     }
 
@@ -72,4 +70,5 @@ public class ProductRequest {
     public void setDescription(String description) {
         this.description = description;
     }
+
 }
