@@ -1,6 +1,6 @@
 package com.felix.springbootshopping.dao;
 
-import com.felix.springbootshopping.constant.ProductCategory;
+import com.felix.springbootshopping.dto.ProductQueryParams;
 import com.felix.springbootshopping.dto.ProductRequest;
 import com.felix.springbootshopping.model.Product;
 
@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ProductDao {
 
-    List<Product> getProducts(ProductCategory category , String search);
+    List<Product> getProducts(ProductQueryParams productQueryParams);
 
     Product getProductById(Integer productId);
 
